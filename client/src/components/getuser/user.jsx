@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './user.css'
 import axios from "axios"
 import { Link } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 export default function User() {
     const [users, setUsers] = useState([])
@@ -16,6 +17,17 @@ export default function User() {
         };
         fetchData();
     }, []);
+
+    const deleteUser = async (userId) => {
+        await axios.delete(`http://localhost:8000/api/delete/user/${userId}`)
+            .then((response) => {
+                setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+                toast.success(response.data.message, { position: "top-right" });
+            })
+            .catch((error) => {
+                console.log(error);
+            })
+    };
 
     return (
         <div className="userTable">
@@ -39,12 +51,8 @@ export default function User() {
                                 <td>{user.email}</td>
                                 <td>{user.address}</td>
                                 <td className="actionsButtons">
-                                    <button type="button" className="btn btn-info">
-                                        <i className="fa-solid fa-pen-to-square"></i>
-                                    </button>
-                                    <button type="button" className="btn btn-danger">
-                                        <i className="fa-solid fa-trash"></i>
-                                    </button>
+                                    <Link to={`/update/${user._id}`} type="button" className="btn btn-info"><i className="fa-solid fa-pen-to-square"></i></Link>
+                                    <button onClick={() => deleteUser(user._id)} type="button" className="btn btn-danger"><i className="fa-solid fa-trash"></i></button>
                                 </td>
                             </tr>
                         )
