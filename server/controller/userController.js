@@ -19,7 +19,6 @@ export const create = async (req, res) => {
     }
 }
 
-
 export const getAllUsers = async (req, res) => {
     try {
         const userData = await User.find();
@@ -31,7 +30,6 @@ export const getAllUsers = async (req, res) => {
         res.status(500).json({ errorMessage: error.message })
     }
 }
-
 
 export const getUserById = async (req, res) => {
     try {
@@ -46,7 +44,6 @@ export const getUserById = async (req, res) => {
         res.status(500).json({ errorMessage: error.message })
     }
 }
-
 
 export const updateUser = async (req, res) => {
     try {
@@ -65,7 +62,6 @@ export const updateUser = async (req, res) => {
         res.status(500).json({ errorMessage: error.message })
     }
 }
-
 
 export const deleteUser = async (req, res) => {
     try {

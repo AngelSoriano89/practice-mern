@@ -32,7 +32,6 @@ export default function AddUser() {
     }
 
     return (
-
         <div className="addUser">
             <Link to="/" type="button" className="btn btn-secondary"><i className="fa-solid fa-backward"></i></Link>
             <h3>Add New User</h3>
